@@ -241,7 +241,8 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                     }
 
                     if ($scope.singleSelection) {
-                        clearObject($scope.selectedModel);
+                        $scope.selectedModel = {};
+                        $scope.externalEvents.onItemSelect($scope.selectedModel);
                     } else {
                         $scope.selectedModel.splice(0, $scope.selectedModel.length);
                     }
@@ -258,9 +259,9 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                     }
 
                     if ($scope.singleSelection) {
-                        clearObject($scope.selectedModel);
+                        $scope.selectedModel = {};
                         angular.extend($scope.selectedModel, finalObj);
-                        $scope.externalEvents.onItemSelect(finalObj);
+                        $scope.externalEvents.onItemSelect($scope.selectedModel);
                         if ($scope.settings.closeOnSelect) $scope.open = false;
 
                         return;
